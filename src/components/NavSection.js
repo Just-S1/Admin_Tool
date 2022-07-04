@@ -13,7 +13,7 @@ import useAuth from '../hooks/useAuth';
 import { useSpring, animated } from 'react-spring';
 import { NimbleEmojiIndex } from 'emoji-mart';
 import Typography from 'src/theme/overrides/Typography';
-import Location from 'src/pages/Location';
+import Location from 'src/pages/dashboard/Location';
 import { Navigate } from 'react-router';
 import { useNavigate } from "react-router-dom";
 
@@ -158,7 +158,8 @@ export function StyledTreeItem(props) {
         />
       }
       label={<div onClick={() => {
-        history(`/dashboard/${children.name.toLowerCase().replace(' ', '-')}`)
+        history(`/dashboard/${children?.name.toLowerCase().replace(' ', '-')}`)
+        console.log(children.name.toLowerCase().replace(' ', '-'))
       }}>{labelText}</div>}
       classes={{
         root: classes.root,
@@ -189,12 +190,14 @@ export default function NavTreeItem() {
   const { user } = useAuth();
   
   const [ expanded, setExpanded ] = React.useState([])
+
+  console.log(user)
   
-  if (user !== null && user.modules.length !== 0) {
-    const { modules } = user;
+  if (user !== null && user.menu.length !== 0) {
+    const { menu } = user;
     return (
       <TreeView expanded={expanded}>
-        {modules.map((node) => {
+        {menu?.map((node) => {
           return <StyledTreeItem key={node.id} nodeId={node.id} labelText={node.name} children={node} expanded={expanded} setExpanded={setExpanded} />;
         })}
       </TreeView>

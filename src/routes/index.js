@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes, useLocation } from 'react-router-dom';
 // layouts
@@ -7,7 +9,6 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // guards
 import AuthGuard from '../guards/AuthGuard';
 import GuestGuard from '../guards/GuestGuard';
-// import AuthGuard from '../guards/AuthGuard';
 // components
 import LoadingScreen from '../components/LoadingScreen';
 // ----------------------------------------------------------------------
@@ -67,18 +68,18 @@ export default function Router() {
           path: 'system-user',
           element: <SystemUser />,
           children: [
-            { element: <Navigate to="/dashboard/system-user/user-list" replace /> }
-            // { path: 'user-list', element: <SystemUser /> },
-            // { path: 'personal-info', element: <SystemUser /> }
+            { element: <Navigate to="/dashboard/system-user-info" replace /> },
+            { path: 'user-list', element: <SystemUser /> },
+            { path: 'personal-info', element: <SystemUser /> }
           ]
         },
         {
-          path: 'location',
-          element: <Location />,
-          children: [
-            { element: <Navigate to="/dashboard/location/phnom-penh" replace /> }
-            // { path: 'phnom-penh', element: <SystemUser /> }
-          ]
+          path: 'phnom-penh',
+          element: <Location />
+        },
+        {
+          path: 'banteay-meanchey',
+          element: <Location />
         },
         {
           path: 'department',
@@ -113,12 +114,10 @@ export default function Router() {
 
 // Authentication
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
-
 // Dashboard
-const SystemUser = Loadable(lazy(() => import('../pages/SystemUser')));
-// const UserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));
-const Location = Loadable(lazy(() => import('../pages/Location')));
-const Department = Loadable(lazy(() => import('../pages/Department')));
+const SystemUser = Loadable(lazy(() => import('../pages/dashboard/SystemUser')));
+const Location = Loadable(lazy(() => import('../pages/dashboard/Location')));
+const Department = Loadable(lazy(() => import('../pages/dashboard/Department')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 // Main
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));

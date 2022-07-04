@@ -24,7 +24,6 @@ export default function App() {
             <GlobalStyles />
             <ProgressBarStyle />
             <ScrollToTop />
-            {/* <Router /> */}
             {isInitialized ? <Router /> : <LoadingScreen />}
           </NotistackProvider>
         </RtlLayout>

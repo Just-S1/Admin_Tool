@@ -14,7 +14,6 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 //
 import Label from '../../Label';
 import { UploadAvatar } from '../../upload';
-import countries from './countries';
 
 // ----------------------------------------------------------------------
 
@@ -152,22 +151,6 @@ export default function UserNewForm({ isEdit, currentUser }) {
                   sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
                 />
               )}
-
-              <FormControlLabel
-                labelPlacement="start"
-                control={<Switch {...getFieldProps('isVerified')} checked={values.isVerified} />}
-                label={
-                  <>
-                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Email Verified
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Disabling this will automatically send the user a verification email
-                    </Typography>
-                  </>
-                }
-                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-              />
             </Card>
           </Grid>
 
@@ -210,11 +193,6 @@ export default function UserNewForm({ isEdit, currentUser }) {
                     helperText={touched.country && errors.country}
                   >
                     <option value="" />
-                    {countries.map((option) => (
-                      <option key={option.code} value={option.label}>
-                        {option.label}
-                      </option>
-                    ))}
                   </TextField>
                 </Stack>
 
