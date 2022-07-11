@@ -51,7 +51,8 @@ export default function Router() {
               <Login />
             </GuestGuard>
           )
-        }
+        },
+        { path: 'reset-password', element: <ResetPassword /> }
       ]
     },
 
@@ -66,16 +67,25 @@ export default function Router() {
       children: [
         {
           path: 'system-user',
-          element: <SystemUser />,
           children: [
-            { element: <Navigate to="/dashboard/system-user-info" replace /> },
-            { path: 'user-list', element: <SystemUser /> },
+            { element: <Navigate to="/dashboard/system-user-info/users" replace /> },
+            { path: 'users', element: <SystemUser /> },
             { path: 'personal-info', element: <SystemUser /> }
           ]
         },
         {
+          path: 'location',
+          children: [
+            {}
+          ]
+        },
+        {
           path: 'phnom-penh',
-          element: <Location />
+          element: <Location />,
+          children: [
+            { element: <Navigate to="/dashboard/location/phnom-penh/daun-penh" replace /> },
+            { element: <Navigate to="/dashboard/location/phnom-penh/prampir-makara" replace /> }
+          ]
         },
         {
           path: 'banteay-meanchey',
@@ -114,6 +124,7 @@ export default function Router() {
 
 // Authentication
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
+const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetPassword')));
 // Dashboard
 const SystemUser = Loadable(lazy(() => import('../pages/dashboard/SystemUser')));
 const Location = Loadable(lazy(() => import('../pages/dashboard/Location')));

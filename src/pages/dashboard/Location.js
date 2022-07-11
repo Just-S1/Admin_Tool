@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import * as React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect, useParams, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -40,6 +41,14 @@ function a11yProps(index) {
   };
 }
 
+function Province() {
+  let { url } = useLocation();
+  let { id } = useParams();
+  let province = find(parseInt(id))
+  console.log(province)
+  return <h1>{province.name}</h1>
+}
+
 export default function Location() {
   const [value, setValue] = React.useState(0);
 
@@ -49,7 +58,7 @@ export default function Location() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <h1>Name</h1>
+      <Province />
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Kindergarten" {...a11yProps(0)} />
@@ -73,7 +82,3 @@ export default function Location() {
     </Box>
   );
 }
-
-const tab_info = [
-
-]

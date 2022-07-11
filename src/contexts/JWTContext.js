@@ -64,9 +64,8 @@ function AuthProvider({ children }) {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await axios.get(process.env.REACT_APP_HOST_API_KEY.concat('/api/v1/myaccount/'));
-          const user = response.data;
-          console.log('=====> myaccount')
+          // const response = await axios.get(process.env.REACT_APP_HOST_API_KEY.concat('/api/v1/myaccount/'));
+          // const user = response.data;
 
           dispatch({
             type: 'INITIALIZE',

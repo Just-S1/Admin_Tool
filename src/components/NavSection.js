@@ -157,10 +157,7 @@ export function StyledTreeItem(props) {
           }}
         />
       }
-      label={<div onClick={() => {
-        history(`/dashboard/${children?.name.toLowerCase().replace(' ', '-')}`)
-        console.log(children.name.toLowerCase().replace(' ', '-'))
-      }}>{labelText}</div>}
+      label={<div onClick={() => ( children?.children.length > 0 ? history(`/dashboard/${children?.name.toLowerCase().replace(' ', '-')}/${children?.name.toLowerCase().replace(' ', '-')}`) : history(`/dashboard/${children?.name.toLowerCase().replace(' ', '-')}`) ) }>{labelText}</div>}
       classes={{
         root: classes.root,
         content: classes.content,

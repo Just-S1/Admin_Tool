@@ -25,36 +25,22 @@ UserNewForm.propTypes = {
 export default function UserNewForm({ isEdit, currentUser }) {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  // const [module, setModule] = useState([]);
 
   const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email(),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('country is required'),
-    company: Yup.string().required('Company is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().required('Avatar is required')
+    username: Yup.string().required('Username is required'),
+    password: Yup.string().required('Password is required'),
+    password2: Yup.string().required('Password must match'),
+    access_module_data: Yup.array()
   });
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      name: currentUser?.name || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      address: currentUser?.address || '',
-      country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
-      zipCode: currentUser?.zipCode || '',
-      avatarUrl: currentUser?.avatarUrl || null,
-      isVerified: currentUser?.isVerified || true,
-      status: currentUser?.status,
-      company: currentUser?.company || '',
-      role: currentUser?.role || ''
+      username: currentUser?.username || '',
+      password: '',
+      password2: '',
+      access_module_data: currentUser?.access_module_data || []
     },
     validationSchema: NewUserSchema,
     onSubmit: async (values, { setSubmitting, resetForm, setErrors }) => {
@@ -160,40 +146,37 @@ export default function UserNewForm({ isEdit, currentUser }) {
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
                   <TextField
                     fullWidth
-                    label="Full Name"
-                    {...getFieldProps('name')}
-                    error={Boolean(touched.name && errors.name)}
-                    helperText={touched.name && errors.name}
+                    label="Username"
+                    {...getFieldProps('username')}
+                    error={Boolean(touched.username && errors.username)}
+                    helperText={touched.username && errors.username}
                   />
                   <TextField
                     fullWidth
-                    label="Email Address"
-                    {...getFieldProps('email')}
-                    error={Boolean(touched.email && errors.email)}
-                    helperText={touched.email && errors.email}
+                    label="Password"
+                    {...getFieldProps('password')}
+                    error={Boolean(touched.password && errors.password)}
+                    helperText={touched.password && errors.password}
                   />
                 </Stack>
 
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
                   <TextField
                     fullWidth
-                    label="Phone Number"
-                    {...getFieldProps('phoneNumber')}
-                    error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-                    helperText={touched.phoneNumber && errors.phoneNumber}
+                    label="Confirm Password"
+                    {...getFieldProps('password2')}
+                    error={Boolean(touched.password2 && errors.password2)}
+                    helperText={touched.password2 && errors.password2}
                   />
                   <TextField
                     select
                     fullWidth
-                    label="Country"
-                    placeholder="Country"
-                    {...getFieldProps('country')}
+                    label="Modules"
+                    {...getFieldProps('access_module_data')}
                     SelectProps={{ native: true }}
-                    error={Boolean(touched.country && errors.country)}
-                    helperText={touched.country && errors.country}
-                  >
-                    <option value="" />
-                  </TextField>
+                    error={Boolean(touched.access_module_data && errors.access_module_data)}
+                    helperText={touched.access_module_data && errors.access_module_data}
+                  />
                 </Stack>
 
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
