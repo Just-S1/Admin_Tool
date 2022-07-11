@@ -62,7 +62,7 @@ export default function SystemUser() {
             </Box>
 
             <UserListToolbar />
-            <Box sx={{ flexShrink: 0 }}>0
+            <Box sx={{ flexShrink: 0 }}>
               <FormModal />
             </Box>
           </Box>
